@@ -9,6 +9,7 @@ with a focus on scaffolding repositories and projects.
 
 ### 1.0.0
 
+- [] Add viper for configuration
 - [] Authenticate with Bitbucket via OAuth
 - [] List projects
 - [] Create a project
