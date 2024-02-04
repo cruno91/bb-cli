@@ -65,13 +65,23 @@ func initConfig() {
 				fmt.Println("Unable to create configuration file:", err)
 				os.Exit(1)
 			}
-			defer file.Close()
+			defer func(file *os.File) {
+				err := file.Close()
+				if err != nil {
+					fmt.Println("Unable to close configuration file:", err)
+					os.Exit(1)
+				}
+			}(file)
 
 			initialConfig := map[string]string{
 				"oauth": "token",
 			}
 
-			viper.WriteConfigAs(cfgFilePath)
+			err = viper.WriteConfigAs(cfgFilePath)
+			if err != nil {
+				fmt.Println("Unable to write initial configuration to file:", err)
+				return
+			}
 			viper.Set("oauth", initialConfig["oauth"])
 		}
 	}
@@ -80,8 +90,16 @@ func initConfig() {
 
 	// If a config file is found, read it in.
 	if err := viper.ReadInConfig(); err == nil {
-		fmt.Fprintln(os.Stderr, "Using config file:", viper.ConfigFileUsed())
+		_, err := fmt.Fprintln(os.Stderr, "Using config file:", viper.ConfigFileUsed())
+		if err != nil {
+			fmt.Println("Unable to write to stderr:", err)
+			return
+		}
 	} else {
-		fmt.Fprintln(os.Stderr, "Unable to read config file:", err)
+		_, err = fmt.Fprintln(os.Stderr, "Unable to read config file:", err)
+		if err != nil {
+			fmt.Println("Unable to write to stderr:", err)
+			return
+		}
 	}
 }
