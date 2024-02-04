@@ -43,7 +43,7 @@ func init() {
 }
 
 // initConfig reads in config file and ENV variables if set.
-func initConfig() {
+func initConfig() {\
 	if cfgFile != "" {
 		// Use config file from the flag.
 		viper.SetConfigFile(cfgFile)
@@ -52,16 +52,36 @@ func initConfig() {
 		home, err := os.UserHomeDir()
 		cobra.CheckErr(err)
 
-		// Search config in home directory with name ".bb-cli" (without extension).
+		cfgFilePath := home + "/.bb-cli.json"
 		viper.AddConfigPath(home)
 		viper.SetConfigType("json")
 		viper.SetConfigName(".bb-cli")
+
+		// Check if the configuration file already exists
+		if _, err := os.Stat(cfgFilePath); os.IsNotExist(err) {
+			// Create the file with initial configuration
+			file, err := os.Create(cfgFilePath)
+			if err != nil {
+				fmt.Println("Unable to create configuration file:", err)
+				os.Exit(1)
+			}
+			defer file.Close()
+
+			initialConfig := map[string]string{
+				"oauth": "token",
+			}
+
+			viper.WriteConfigAs(cfgFilePath)
+			viper.Set("oauth", initialConfig["oauth"])
+		}
 	}
 
-	viper.AutomaticEnv() // read in environment variables that match
+	viper.AutomaticEnv() // Read in environment variables that match
 
 	// If a config file is found, read it in.
 	if err := viper.ReadInConfig(); err == nil {
 		fmt.Fprintln(os.Stderr, "Using config file:", viper.ConfigFileUsed())
+	} else {
+		fmt.Fprintln(os.Stderr, "Unable to read config file:", err)
 	}
 }
