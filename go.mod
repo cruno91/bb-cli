@@ -1,4 +1,4 @@
-module github.com/mwiater/golangcliscaffold
+module bb-cli
 
 go 1.21.6
 
