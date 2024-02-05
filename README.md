@@ -5,6 +5,16 @@
 This is a specialized command line tool to interact with the Bitbucket API
 with a focus on scaffolding repositories and projects.
 
+## Usage
+
+```bash
+# Show help
+bb -h
+
+# Overide config file
+bb --config=config.json
+```
+
 ## Todo
 
 ### 1.0.0
