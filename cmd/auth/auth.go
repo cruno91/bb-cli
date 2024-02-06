@@ -6,8 +6,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// AuthCmd represents the diskUsage command
-var AuthCmd = &cobra.Command{
+// CmdAuth represents the diskUsage command
+var CmdAuth = &cobra.Command{
 	Use:   "auth",
 	Short: "Authenticate with a Bitbucket account.",
 	Long:  ``,

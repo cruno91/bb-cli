@@ -32,7 +32,7 @@ func init() {
 	cobra.OnInitialize(initConfig)
 
 	viper.Set("oauth", "token")
-	rootCmd.AddCommand(auth.AuthCmd)
+	rootCmd.AddCommand(auth.CmdAuth)
 
 	// Here you will define your flags and configuration settings.
 	// Cobra supports persistent flags, which, if defined here,
