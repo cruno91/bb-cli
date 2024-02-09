@@ -13,6 +13,9 @@ bb -h
 
 # Overide config file
 bb --config=config.json
+
+# Authenticate with Bitbucket
+bb auth -t <token>
 ```
 
 ## Todo
