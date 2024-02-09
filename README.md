@@ -20,7 +20,7 @@ bb --config=config.json
 ### 1.0.0
 
 - [x] Add viper for configuration
-- [] Authenticate with Bitbucket via OAuth
+- [x] Authenticate with Bitbucket via OAuth
 - [] List projects
 - [] Create a project
 - [] List repositories in a project
