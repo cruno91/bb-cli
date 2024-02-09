@@ -47,7 +47,15 @@ func init() {
 	}
 }
 
-func auth(token string) (c *bitbucket.Client) {
+func Auth() (c *bitbucket.Client) {
+	storedToken := viper.Get("oauth.token")
+	// Assert that the token is a string.
+	token, ok := storedToken.(string)
+	if !ok {
+		fmt.Println("Invalid token format. Please authenticate with a valid token.")
+		return
+	}
+
 	bitbucketClientId, bitbucketClientSecret, tokenError := splitToken(token)
 
 	if tokenError != nil {
