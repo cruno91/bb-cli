@@ -3,6 +3,7 @@ package cmd
 
 import (
 	"bb-cli/cmd/auth"
+	"bb-cli/cmd/get"
 	"fmt"
 	"os"
 
@@ -33,6 +34,7 @@ func init() {
 
 	viper.Set("oauth", "token")
 	rootCmd.AddCommand(auth.CmdAuth)
+	rootCmd.AddCommand(get.CmdGet)
 
 	// Here you will define your flags and configuration settings.
 	// Cobra supports persistent flags, which, if defined here,
