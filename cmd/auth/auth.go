@@ -20,7 +20,7 @@ var CmdAuth = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		if oauthToken != "" {
 			// Save the token in the viper configuration
-			viper.Set("oauth.token", oauthToken)
+			viper.Set("oauth", oauthToken)
 
 			// Attempt to save the configuration to file
 			if err := viper.WriteConfig(); err != nil {
@@ -48,7 +48,7 @@ func init() {
 }
 
 func Auth() (c *bitbucket.Client) {
-	storedToken := viper.Get("oauth.token")
+	storedToken := viper.Get("oauth")
 	// Assert that the token is a string.
 	token, ok := storedToken.(string)
 	if !ok {

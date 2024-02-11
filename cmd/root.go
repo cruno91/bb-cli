@@ -32,7 +32,6 @@ func Execute() {
 func init() {
 	cobra.OnInitialize(initConfig)
 
-	viper.Set("oauth", "token")
 	rootCmd.AddCommand(auth.CmdAuth)
 	rootCmd.AddCommand(get.CmdGet)
 
