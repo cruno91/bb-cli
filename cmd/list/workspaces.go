@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"github.com/ktrysmt/go-bitbucket"
 	"github.com/spf13/cobra"
+	"os"
+	"text/tabwriter"
 )
 
 // CmdListWorkspaces represents the list workspace command
@@ -32,8 +34,28 @@ func listWorkspaces(bb *bitbucket.Client) {
 		return
 	}
 
-	fmt.Println("Workspaces:")
+	// Initialize table.
+	w := tabwriter.NewWriter(os.Stdout, 0, 0, 2, ' ', tabwriter.TabIndent)
+
+	// Print the header row.
+	_, err = fmt.Fprintln(w, "Name\tUUID\tSlug")
+	if err != nil {
+		return
+	}
+
+	// Print each workspace in a row.
 	for _, workspace := range workspaceList.Workspaces {
-		fmt.Printf("%s (%s): %s\n", workspace.Name, workspace.UUID, workspace.Slug)
+		_, err := fmt.Fprintf(w, "%s\t%s\t%s\n", workspace.Name, workspace.UUID, workspace.Slug)
+		if err != nil {
+			fmt.Println("Error:", err)
+			return
+		}
+	}
+
+	// Ensure the output is flushed to standard output.
+	err = w.Flush()
+	if err != nil {
+		fmt.Println("Error:", err)
+		return
 	}
 }
