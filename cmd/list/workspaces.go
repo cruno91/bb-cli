@@ -26,11 +26,14 @@ func init() {
 }
 
 func listWorkspaces(bb *bitbucket.Client) {
-	workspaces, err := bb.Workspaces.List()
+	workspaceList, err := bb.Workspaces.List()
 	if err != nil {
 		fmt.Println("Error:", err)
 		return
 	}
 
-	fmt.Println("Workspaces:", workspaces)
+	fmt.Println("Workspaces:")
+	for _, workspace := range workspaceList.Workspaces {
+		fmt.Printf("%s (%s): %s\n", workspace.Name, workspace.UUID, workspace.Slug)
+	}
 }
