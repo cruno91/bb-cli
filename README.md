@@ -24,7 +24,7 @@ bb auth -t <token>
 
 - [x] Add viper for configuration
 - [x] Authenticate with Bitbucket via OAuth
-- [] List projects
+- [x] List projects
 - [] Create a project
 - [] List repositories in a project
 - [] Create a repository in a project

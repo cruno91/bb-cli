@@ -4,6 +4,7 @@ package cmd
 import (
 	"bb-cli/cmd/auth"
 	"bb-cli/cmd/get"
+	"bb-cli/cmd/list"
 	"fmt"
 	"os"
 
@@ -34,6 +35,7 @@ func init() {
 
 	rootCmd.AddCommand(auth.CmdAuth)
 	rootCmd.AddCommand(get.CmdGet)
+	rootCmd.AddCommand(list.CmdList)
 
 	// Here you will define your flags and configuration settings.
 	// Cobra supports persistent flags, which, if defined here,
