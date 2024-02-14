@@ -20,7 +20,7 @@ var CmdGetProject = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		bb := auth.Auth()
 
-		GetProject(bb, workspaceName, projectName)
+		FetchProject(bb, workspaceName, projectName)
 	},
 }
 
@@ -36,7 +36,7 @@ func init() {
 	}
 }
 
-func GetProject(bb *bitbucket.Client, workspace string, project string) {
+func FetchProject(bb *bitbucket.Client, workspace string, project string) {
 	projectOpt := &bitbucket.ProjectOptions{
 		Owner: workspace,
 		Key:   project,
