@@ -18,8 +18,6 @@ var CmdGetProject = &cobra.Command{
 	Short: "Get something from Bitbucket.",
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("project called")
-
 		bb := auth.Auth()
 
 		GetProject(bb, workspaceName, projectName)
