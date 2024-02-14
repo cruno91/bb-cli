@@ -22,7 +22,7 @@ var CmdGetProject = &cobra.Command{
 
 		bb := auth.Auth()
 
-		getProject(bb, workspaceName, projectName)
+		GetProject(bb, workspaceName, projectName)
 	},
 }
 
@@ -38,7 +38,7 @@ func init() {
 	}
 }
 
-func getProject(bb *bitbucket.Client, workspace string, project string) {
+func GetProject(bb *bitbucket.Client, workspace string, project string) {
 	projectOpt := &bitbucket.ProjectOptions{
 		Owner: workspace,
 		Key:   project,
@@ -47,7 +47,12 @@ func getProject(bb *bitbucket.Client, workspace string, project string) {
 	res, err := bb.Workspaces.GetProject(projectOpt)
 
 	if err != nil {
-		fmt.Println("Error:", err)
+
+		if (err.Error()) == "404 Not Found" {
+			fmt.Println("Project not found.")
+		} else {
+			fmt.Println("Error:", err)
+		}
 		return
 	}
 
