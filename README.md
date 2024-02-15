@@ -11,11 +11,20 @@ with a focus on scaffolding repositories and projects.
 # Show help
 bb -h
 
-# Overide config file
+# Override config file
 bb --config=config.json
 
 # Authenticate with Bitbucket
 bb auth -t <token>
+
+# List workspaces
+bb list workspaces
+
+# List projects
+bb list projects -w <workspace>
+
+# Get a project
+bb get project -w <workspace> -p <project>
 ```
 
 ## Todo
