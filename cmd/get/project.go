@@ -9,7 +9,7 @@ import (
 
 var (
 	workspaceName string
-	projectName   string
+	projectKey    string
 )
 
 // CmdGetProject represents the get project command
@@ -20,7 +20,7 @@ var CmdGetProject = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		bb := auth.Auth()
 
-		project, err := FetchProject(bb, workspaceName, projectName)
+		project, err := FetchProject(bb, workspaceName, projectKey)
 		if err != nil {
 			fmt.Println("Error getting project:", err)
 		} else {
@@ -36,7 +36,7 @@ func init() {
 	if err := CmdGetProject.MarkFlagRequired("workspace"); err != nil {
 		fmt.Println(err)
 	}
-	CmdGetProject.Flags().StringVarP(&projectName, "project", "p", "", "Bitbucket project")
+	CmdGetProject.Flags().StringVarP(&projectKey, "project", "p", "", "Bitbucket project")
 	if err := CmdGetProject.MarkFlagRequired("project"); err != nil {
 		fmt.Println(err)
 	}
