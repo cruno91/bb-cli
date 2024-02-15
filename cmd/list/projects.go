@@ -10,7 +10,7 @@ import (
 )
 
 var (
-	workspaceName string
+	workspaceSlug string
 )
 
 // CmdListProjects represents the list workspace command
@@ -21,13 +21,13 @@ var CmdListProjects = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		bb := auth.Auth()
 
-		listProjects(bb, workspaceName)
+		listProjects(bb, workspaceSlug)
 	},
 }
 
 func init() {
 	CmdList.AddCommand(CmdListProjects)
-	CmdListProjects.Flags().StringVarP(&workspaceName, "workspace", "w", "", "Bitbucket workspace")
+	CmdListProjects.Flags().StringVarP(&workspaceSlug, "workspace", "w", "", "Bitbucket workspace (Example: \"my-workspace\"")
 	if err := CmdListProjects.MarkFlagRequired("workspace"); err != nil {
 		fmt.Println(err)
 	}
