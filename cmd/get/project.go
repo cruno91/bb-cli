@@ -2,6 +2,7 @@ package get
 
 import (
 	"bb-cli/cmd/auth"
+	"bb-cli/cmd/list"
 	"fmt"
 	"github.com/ktrysmt/go-bitbucket"
 	"github.com/spf13/cobra"
@@ -23,9 +24,10 @@ var CmdGetProject = &cobra.Command{
 		project, err := FetchProject(bb, workspaceSlug, projectKey)
 		if err != nil {
 			fmt.Println("Error getting project:", err)
+		} else if project != nil {
+			list.PrintProjectsTable([]bitbucket.Project{*project})
 		} else {
-			fmt.Println(project)
-
+			fmt.Println("Project not found.")
 		}
 	},
 }
@@ -53,7 +55,6 @@ func FetchProject(bb *bitbucket.Client, workspace string, project string) (*bitb
 	if err != nil {
 
 		if (err.Error()) == "404 Not Found" {
-			fmt.Println("Project not found.")
 			return nil, nil
 		} else {
 			fmt.Println("Error:", err)
