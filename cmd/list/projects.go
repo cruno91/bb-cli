@@ -40,10 +40,10 @@ func listProjects(bb *bitbucket.Client, workspace string) {
 		return
 	}
 
-	printProjectsTable(projectList.Items)
+	PrintProjectsTable(projectList.Items)
 }
 
-func printProjectsTable(projects []bitbucket.Project) {
+func PrintProjectsTable(projects []bitbucket.Project) {
 	// Initialize table.
 	w := tabwriter.NewWriter(os.Stdout, 0, 0, 2, ' ', tabwriter.TabIndent)
 
