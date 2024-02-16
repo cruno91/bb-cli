@@ -10,7 +10,7 @@ import (
 )
 
 var (
-	workspaceName string
+	workspaceSlug string
 )
 
 // CmdListProjects represents the list workspace command
@@ -21,13 +21,13 @@ var CmdListProjects = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		bb := auth.Auth()
 
-		listProjects(bb, workspaceName)
+		listProjects(bb, workspaceSlug)
 	},
 }
 
 func init() {
 	CmdList.AddCommand(CmdListProjects)
-	CmdListProjects.Flags().StringVarP(&workspaceName, "workspace", "w", "", "Bitbucket workspace")
+	CmdListProjects.Flags().StringVarP(&workspaceSlug, "workspace", "w", "", "Bitbucket workspace (Example: \"my-workspace\"")
 	if err := CmdListProjects.MarkFlagRequired("workspace"); err != nil {
 		fmt.Println(err)
 	}
@@ -40,17 +40,21 @@ func listProjects(bb *bitbucket.Client, workspace string) {
 		return
 	}
 
+	PrintProjectsTable(projectList.Items)
+}
+
+func PrintProjectsTable(projects []bitbucket.Project) {
 	// Initialize table.
 	w := tabwriter.NewWriter(os.Stdout, 0, 0, 2, ' ', tabwriter.TabIndent)
 
 	// Print the header row.
-	_, err = fmt.Fprintln(w, "Name\tUUID\tKey\tPrivate\tDescription")
+	_, err := fmt.Fprintln(w, "Name\tUUID\tKey\tPrivate\tDescription")
 	if err != nil {
 		return
 	}
 
 	// Print each workspace in a row.
-	for _, project := range projectList.Items {
+	for _, project := range projects {
 		private := "no"
 		if project.Is_private == true {
 			private = "yes"

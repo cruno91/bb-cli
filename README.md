@@ -34,7 +34,7 @@ bb get project -w <workspace> -p <project>
 - [x] Add viper for configuration
 - [x] Authenticate with Bitbucket via OAuth
 - [x] List projects
-- [] Create a project
+- [x] Create a project
 - [] List repositories in a project
 - [] Create a repository in a project
 - [] Create an authentication key in a repository
