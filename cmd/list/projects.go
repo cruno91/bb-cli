@@ -40,17 +40,21 @@ func listProjects(bb *bitbucket.Client, workspace string) {
 		return
 	}
 
+	printProjectsTable(projectList.Items)
+}
+
+func printProjectsTable(projects []bitbucket.Project) {
 	// Initialize table.
 	w := tabwriter.NewWriter(os.Stdout, 0, 0, 2, ' ', tabwriter.TabIndent)
 
 	// Print the header row.
-	_, err = fmt.Fprintln(w, "Name\tUUID\tKey\tPrivate\tDescription")
+	_, err := fmt.Fprintln(w, "Name\tUUID\tKey\tPrivate\tDescription")
 	if err != nil {
 		return
 	}
 
 	// Print each workspace in a row.
-	for _, project := range projectList.Items {
+	for _, project := range projects {
 		private := "no"
 		if project.Is_private == true {
 			private = "yes"
