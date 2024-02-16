@@ -3,6 +3,7 @@ package create
 import (
 	"bb-cli/cmd/auth"
 	"bb-cli/cmd/get"
+	"bb-cli/cmd/list"
 	"fmt"
 	"github.com/ktrysmt/go-bitbucket"
 	"github.com/spf13/cobra"
@@ -63,10 +64,13 @@ func createProject(bb *bitbucket.Client, workspace string, name string, key stri
 		IsPrivate: private,
 	}
 
-	_, err := bb.Workspaces.CreateProject(projectOpt)
+	res, err := bb.Workspaces.CreateProject(projectOpt)
 
 	if err != nil {
 		fmt.Println("Error:", err)
 		return
 	}
+
+	fmt.Println("Project created...")
+	list.PrintProjectsTable([]bitbucket.Project{*res})
 }
