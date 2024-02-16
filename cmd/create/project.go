@@ -56,7 +56,6 @@ func init() {
 }
 
 func createProject(bb *bitbucket.Client, workspace string, name string, key string, private bool) {
-	//en := url.QueryEscape(name)
 	projectOpt := &bitbucket.ProjectOptions{
 		Owner:     workspace,
 		Name:      name,
