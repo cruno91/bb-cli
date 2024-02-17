@@ -2,8 +2,8 @@
 
 ## Description
 
-This is a specialized command line tool to interact with the Bitbucket API
-with a focus on scaffolding repositories and projects.
+This is an example of a specialized command line tool to interact with the 
+Bitbucket API with a focus on scaffolding repositories and projects.
 
 ## Usage
 
