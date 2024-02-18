@@ -26,5 +26,6 @@ bb list projects -w <workspace>
 # Get a project
 bb get project -w <workspace> -p <project>
 
+# Create a project
 bb create project -w <workspace> -n "<name>" -k <key> -p -d "<description>"
 ```
