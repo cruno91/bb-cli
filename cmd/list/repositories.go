@@ -35,4 +35,17 @@ func init() {
 	}
 }
 
-func listRepositories(bb *bitbucket.Client, workspace string, project string) {}
+func listRepositories(bb *bitbucket.Client, workspace string, project string) {
+	options := &bitbucket.RepositoriesOptions{
+		Owner: workspace,
+	}
+
+	repositories, err := bb.Repositories.ListForAccount(options)
+
+	if err != nil {
+		fmt.Println("Error:", err)
+		return
+	}
+
+	fmt.Println(repositories)
+}
