@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"github.com/ktrysmt/go-bitbucket"
 	"github.com/spf13/cobra"
+	"os"
+	"text/tabwriter"
 )
 
 var (
@@ -29,7 +31,7 @@ func init() {
 	if err := CmdListRpeositories.MarkFlagRequired("workspace"); err != nil {
 		fmt.Println(err)
 	}
-	CmdListRpeositories.Flags().StringVarP(&projectKey, "project", "w", "", "Bitbucket project (Example: \"PROJ\"")
+	CmdListRpeositories.Flags().StringVarP(&projectKey, "project", "p", "", "Bitbucket project (Example: \"PROJ\"")
 	if err := CmdListRpeositories.MarkFlagRequired("project"); err != nil {
 		fmt.Println(err)
 	}
@@ -47,5 +49,32 @@ func listRepositories(bb *bitbucket.Client, workspace string, project string) {
 		return
 	}
 
-	fmt.Println(repositories)
+	PrintRepositoriesTable(repositories.Items)
+}
+
+func PrintRepositoriesTable(repositories []bitbucket.Repository) {
+	// Initialize table.
+	w := tabwriter.NewWriter(os.Stdout, 0, 0, 2, ' ', tabwriter.TabIndent)
+
+	// Print the header row.
+	_, err := fmt.Fprintln(w, "Slug\tName")
+	if err != nil {
+		return
+	}
+
+	// Print each workspace in a row.
+	for _, repository := range repositories {
+		_, err := fmt.Fprintf(w, "%s\t%s\n", repository.Slug, repository.Name)
+		if err != nil {
+			fmt.Println("Error:", err)
+			return
+		}
+	}
+
+	// Ensure the output is flushed to standard output.
+	err = w.Flush()
+	if err != nil {
+		fmt.Println("Error:", err)
+		return
+	}
 }
