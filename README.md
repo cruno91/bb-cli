@@ -28,4 +28,7 @@ bb get project -w <workspace> -p <project>
 
 # Create a project
 bb create project -w <workspace> -n "<name>" -k <key> -p -d "<description>"
+
+# List repositories
+bb list repositories -w <workspace> -p <project>
 ```
