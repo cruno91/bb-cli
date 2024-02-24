@@ -38,7 +38,7 @@ func init() {
 	if err := CmdGetProject.MarkFlagRequired("workspace"); err != nil {
 		fmt.Println(err)
 	}
-	CmdGetProject.Flags().StringVarP(&projectKey, "project", "p", "", "Bitbucket project key (Example: For a project named \"My Project\" the key could be \"MP\"")
+	CmdGetProject.Flags().StringVarP(&projectKey, "project", "n", "", "Bitbucket project key (Example: For a project named \"My Project\" the key could be \"MP\"")
 	if err := CmdGetProject.MarkFlagRequired("project"); err != nil {
 		fmt.Println(err)
 	}
