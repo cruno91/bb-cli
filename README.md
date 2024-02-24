@@ -31,4 +31,7 @@ bb create project -w <workspace> -n "<name>" -k <key> -p -d "<description>"
 
 # List repositories
 bb list repositories -w <workspace> -p <project>
+
+# Create repository
+bb create repository -w <workspace> -n <project> -r <repository slug>
 ```
