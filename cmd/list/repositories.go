@@ -31,7 +31,7 @@ func init() {
 	if err := CmdListRpeositories.MarkFlagRequired("workspace"); err != nil {
 		fmt.Println(err)
 	}
-	CmdListRpeositories.Flags().StringVarP(&projectKey, "project", "p", "", "Bitbucket project (Example: \"PROJ\"")
+	CmdListRpeositories.Flags().StringVarP(&projectKey, "project", "n", "", "Bitbucket project (Example: \"PROJ\"")
 	if err := CmdListRpeositories.MarkFlagRequired("project"); err != nil {
 		fmt.Println(err)
 	}

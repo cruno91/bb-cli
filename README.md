@@ -24,11 +24,14 @@ bb list workspaces
 bb list projects -w <workspace>
 
 # Get a project
-bb get project -w <workspace> -p <project>
+bb get project -w <workspace> -n <project>
 
 # Create a project
 bb create project -w <workspace> -n "<name>" -k <key> -p -d "<description>"
 
 # List repositories
-bb list repositories -w <workspace> -p <project>
+bb list repositories -w <workspace> -n <project>
+
+# Create repository
+bb create repository -w <workspace> -n <project> -r <repository slug> -p
 ```
