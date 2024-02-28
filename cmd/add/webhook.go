@@ -19,7 +19,7 @@ var CmdAddWebhook = &cobra.Command{
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
 		bb := auth.Auth()
-		addWebhook(bb, workspaceSlug, projectKey, webhookUrl, webhookDescription, true)
+		addWebhook(bb, workspaceSlug, projectKey, webhookUrl, webhookDescription, true, []string{"repo:push", "repo:update"})
 
 	},
 }
