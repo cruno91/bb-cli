@@ -34,4 +34,10 @@ bb list repositories -w <workspace> -n <project>
 
 # Create repository
 bb create repository -w <workspace> -n <project> -r <repository slug> -p
+
+# Add access key
+bb add access-key -w <workspace> -r <repository slug> -k ABCDEFG1234567 -l Example
+
+# Add a webhook
+bb add webhook -w <workspace> -r <repositor slugy> -u https://www.example.com/api -d Example --events repo:push repo:update
 ```
