@@ -9,6 +9,7 @@ import (
 
 var (
 	webhookUrl         string
+	repositorySlug     string
 	webhookDescription string
 	events             []string
 )
@@ -24,7 +25,7 @@ var CmdAddWebhook = &cobra.Command{
 		}
 
 		bb := auth.Auth()
-		addWebhook(bb, workspaceSlug, projectKey, webhookUrl, webhookDescription, true, events)
+		addWebhook(bb, workspaceSlug, repositorySlug, webhookUrl, webhookDescription, true, events)
 	},
 }
 
@@ -34,7 +35,7 @@ func init() {
 	if err := CmdAddWebhook.MarkFlagRequired("workspace"); err != nil {
 		fmt.Println(err)
 	}
-	CmdAddWebhook.Flags().StringVarP(&projectKey, "project", "n", "", "Bitbucket project key (Example: For a project named \"My Project\" the key could be \"MP\"")
+	CmdAddWebhook.Flags().StringVarP(&repositorySlug, "repository", "r", "", "Bitbucket project key (Example: For a project named \"My Project\" the key could be \"MP\"")
 	if err := CmdAddWebhook.MarkFlagRequired("project"); err != nil {
 		fmt.Println(err)
 	}
@@ -50,10 +51,10 @@ func init() {
 
 }
 
-func addWebhook(bb *bitbucket.Client, workspace string, project string, url string, label string, active bool, events []string) {
+func addWebhook(bb *bitbucket.Client, workspace string, repository string, url string, label string, active bool, events []string) {
 	webhookOpts := &bitbucket.WebhooksOptions{
 		Owner:       workspace,
-		RepoSlug:    project,
+		RepoSlug:    repository,
 		Description: label,
 		Url:         url,
 		Active:      active,

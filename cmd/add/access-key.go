@@ -9,7 +9,6 @@ import (
 
 var (
 	workspaceSlug string
-	projectKey    string
 	accessKey     string
 	keyLabel      string
 )
@@ -21,7 +20,7 @@ var CmdAddAccessKey = &cobra.Command{
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
 		bb := auth.Auth()
-		addAccessKey(bb, workspaceSlug, projectKey, accessKey, keyLabel)
+		addAccessKey(bb, workspaceSlug, repositorySlug, accessKey, keyLabel)
 
 	},
 }
@@ -32,8 +31,8 @@ func init() {
 	if err := CmdAddAccessKey.MarkFlagRequired("workspace"); err != nil {
 		fmt.Println(err)
 	}
-	CmdAddAccessKey.Flags().StringVarP(&projectKey, "project", "n", "", "Bitbucket project key (Example: For a project named \"My Project\" the key could be \"MP\"")
-	if err := CmdAddAccessKey.MarkFlagRequired("project"); err != nil {
+	CmdAddAccessKey.Flags().StringVarP(&repositorySlug, "repository", "r", "", "Bitbucket project key (Example: For a project named \"My Project\" the key could be \"MP\"")
+	if err := CmdAddAccessKey.MarkFlagRequired("repository"); err != nil {
 		fmt.Println(err)
 	}
 	CmdAddAccessKey.Flags().StringVarP(&accessKey, "access-key", "k", "", "Access key")
@@ -47,10 +46,10 @@ func init() {
 
 }
 
-func addAccessKey(bb *bitbucket.Client, workspace string, project string, key string, label string) {
+func addAccessKey(bb *bitbucket.Client, workspace string, repository string, key string, label string) {
 	accessKeyOpts := &bitbucket.DeployKeyOptions{
 		Owner:    workspace,
-		RepoSlug: project,
+		RepoSlug: repository,
 		Label:    label,
 		Key:      key,
 	}
