@@ -10,6 +10,7 @@ import (
 var (
 	webhookUrl         string
 	webhookDescription string
+	events             []string
 )
 
 // CmdAddWebhook represents the add webhook command
@@ -18,9 +19,12 @@ var CmdAddWebhook = &cobra.Command{
 	Short: "Get something from Bitbucket.",
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
-		bb := auth.Auth()
-		addWebhook(bb, workspaceSlug, projectKey, webhookUrl, webhookDescription, true, []string{"repo:push", "repo:update"})
+		if len(events) == 0 {
+			events = []string{"repo:push", "repo:update"}
+		}
 
+		bb := auth.Auth()
+		addWebhook(bb, workspaceSlug, projectKey, webhookUrl, webhookDescription, true, events)
 	},
 }
 
@@ -42,6 +46,7 @@ func init() {
 	if err := CmdAddWebhook.MarkFlagRequired("description"); err != nil {
 		fmt.Println(err)
 	}
+	CmdAddWebhook.Flags().StringSliceVarP(&events, "events", "e", []string{}, "Webhook events (e.g., repo:push, repo:update)")
 
 }
 
