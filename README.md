@@ -40,4 +40,7 @@ bb add access-key -w <workspace> -r <repository slug> -k <access key> -l <access
 
 # Add a webhook
 bb add webhook -w <workspace> -r <repositor slugy> -u <webhook url> -d <webhook label> --events repo:push repo:update
+
+# Add pipeline variable
+bb add variable -w <workspace> -r <repository slug> -v <value> -l <label> -s
 ```
