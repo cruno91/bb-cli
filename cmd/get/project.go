@@ -16,8 +16,8 @@ var (
 // CmdGetProject represents the get project command
 var CmdGetProject = &cobra.Command{
 	Use:   "project",
-	Short: "Get something from Bitbucket.",
-	Long:  ``,
+	Short: "Get a project from a Bitbucket workspace.",
+	Long:  `Pass in the workspace slug and project key to get its information from Bitbucket.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		bb := auth.Auth()
 

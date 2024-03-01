@@ -20,8 +20,8 @@ var (
 // CmdCreateProject represents the create project command
 var CmdCreateProject = &cobra.Command{
 	Use:   "project",
-	Short: "Get something from Bitbucket.",
-	Long:  ``,
+	Short: "Create a project in a Bitbucket workspace.",
+	Long:  `Pass in a workspace, project name, project key, description, and by using the "p" flag, mark it private.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		bb := auth.Auth()
 

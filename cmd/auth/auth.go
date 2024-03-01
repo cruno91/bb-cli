@@ -16,7 +16,7 @@ var (
 var CmdAuth = &cobra.Command{
 	Use:   "auth",
 	Short: "Authenticate with a Bitbucket account.",
-	Long:  ``,
+	Long:  `Use the OAuth token and key joined by a ":" to authenticate with your Bitbucket workspace.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		if oauthToken != "" {
 			// Save the token in the viper configuration

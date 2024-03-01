@@ -5,6 +5,14 @@
 This is an example of a specialized command line tool to interact with the 
 Bitbucket API with a focus on scaffolding repositories and projects.
 
+## Setup
+
+Create an OAuth consumer for your Bitbucket workspace and use the token in the
+format of <key>:<token> to authenticate the CLI with your workspace.
+
+Be sure to enable the authorizations for the consumer you want to test with the
+CLI.
+
 ## Usage
 
 ```bash

@@ -8,10 +8,12 @@ import (
 // CmdGet represents the get command
 var CmdGet = &cobra.Command{
 	Use:   "get",
-	Short: "Get something from Bitbucket.",
+	Short: "Get a project from Bitbucket.",
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("get called")
+		if len(args) < 1 {
+			fmt.Println("Use the get command with project.")
+		}
 	},
 }
 

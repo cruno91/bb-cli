@@ -16,8 +16,9 @@ var (
 // CmdAddPipelineVariable represents the get project command
 var CmdAddPipelineVariable = &cobra.Command{
 	Use:   "variable",
-	Short: "Get something from Bitbucket.",
-	Long:  ``,
+	Short: "Add a pipeline variable for a Bitbucket repository.",
+	Long: `Pass in a workspace, repository, variable value, and the variable label to add it to a Bitbucket repository.
+			Add the "s" flag to make it a secure variable.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		bb := auth.Auth()
 		addPipelineVariable(bb, workspaceSlug, repositorySlug, pipelineVariable, variableLabel, secureFlag)

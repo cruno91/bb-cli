@@ -8,10 +8,12 @@ import (
 // CmdCreate represents the create command
 var CmdCreate = &cobra.Command{
 	Use:   "create",
-	Short: "Get something from Bitbucket.",
+	Short: "Get a project or repository in a Bitbucket workspace.",
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("create called")
+		if len(args) < 1 {
+			fmt.Println("Use the create command with project or repository.")
+		}
 	},
 }
 

@@ -12,11 +12,10 @@ import (
 // CmdListWorkspaces represents the list workspace command
 var CmdListWorkspaces = &cobra.Command{
 	Use:   "workspaces",
-	Short: "Get something from Bitbucket.",
+	Short: "List workspace the given token is authenticated for in Bitbucket.",
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
 		bb := auth.Auth()
-
 		listWorkspaces(bb)
 	},
 }

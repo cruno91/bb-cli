@@ -20,7 +20,9 @@ var cfgFile string
 var rootCmd = &cobra.Command{
 	Use:   "bb",
 	Short: "Create and scaffold Bitbucket projects and repositories.",
-	Long:  `Create and scaffold Bitbucket projects and repositories.`,
+	Long: `This example CLI can be used as a reference on how to create a CLI tool with the cobra and viper
+			libraries. It could also be used as an example on how to interact with 3rd party libraries in a
+			Golang application, and show some basic Golang syntax.`,
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.

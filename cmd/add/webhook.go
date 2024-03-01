@@ -18,7 +18,9 @@ var (
 var CmdAddWebhook = &cobra.Command{
 	Use:   "webhook",
 	Short: "Get something from Bitbucket.",
-	Long:  ``,
+	Long: `Pass in a workspace, repository, webhook url, the webhook label, and a series of events for the webhook 
+			to listen to to add it to a Bitbucket repository like "repo:push" or "repo:update". If you do not add
+			any events, those two defaults will be used.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		if len(events) == 0 {
 			events = []string{"repo:push", "repo:update"}
@@ -36,7 +38,7 @@ func init() {
 		fmt.Println(err)
 	}
 	CmdAddWebhook.Flags().StringVarP(&repositorySlug, "repository", "r", "", "Bitbucket project key (Example: For a project named \"My Project\" the key could be \"MP\"")
-	if err := CmdAddWebhook.MarkFlagRequired("project"); err != nil {
+	if err := CmdAddWebhook.MarkFlagRequired("repository"); err != nil {
 		fmt.Println(err)
 	}
 	CmdAddWebhook.Flags().StringVarP(&webhookUrl, "url", "u", "", "Webhook Url")

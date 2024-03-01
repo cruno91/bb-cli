@@ -16,7 +16,7 @@ var (
 // CmdListProjects represents the list workspace command
 var CmdListProjects = &cobra.Command{
 	Use:   "projects",
-	Short: "Get something from Bitbucket.",
+	Short: "List projects from a Bitbucket workspace.",
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
 		bb := auth.Auth()

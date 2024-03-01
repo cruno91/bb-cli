@@ -16,12 +16,11 @@ var (
 // CmdAddAccessKey represents the get project command
 var CmdAddAccessKey = &cobra.Command{
 	Use:   "access-key",
-	Short: "Get something from Bitbucket.",
-	Long:  ``,
+	Short: "Add an access key to a Bitbucket repository.",
+	Long:  `Pass in a workspace, repository, access key value, and the key label to add it to a Bitbucket repository.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		bb := auth.Auth()
 		addAccessKey(bb, workspaceSlug, repositorySlug, accessKey, keyLabel)
-
 	},
 }
 

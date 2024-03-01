@@ -15,8 +15,8 @@ var (
 // CmdCreateRepository represents the create repository command
 var CmdCreateRepository = &cobra.Command{
 	Use:   "repository",
-	Short: "Get something from Bitbucket.",
-	Long:  ``,
+	Short: "Create a repository in a Bitbucket project.",
+	Long:  `Pass in a workspace, project key, repository name, and by using the "p" flag, mark it private.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		bb := auth.Auth()
 

@@ -13,26 +13,25 @@ var (
 	projectKey string
 )
 
-// CmdListRpeositories represents the list workspace command
-var CmdListRpeositories = &cobra.Command{
+// CmdListRepositories represents the list workspace command
+var CmdListRepositories = &cobra.Command{
 	Use:   "repositories",
-	Short: "Get something from Bitbucket.",
+	Short: "List repositories from a Bitbucket project.",
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
 		bb := auth.Auth()
-
 		listRepositories(bb, workspaceSlug, projectKey)
 	},
 }
 
 func init() {
-	CmdList.AddCommand(CmdListRpeositories)
-	CmdListRpeositories.Flags().StringVarP(&workspaceSlug, "workspace", "w", "", "Bitbucket workspace (Example: \"my-workspace\"")
-	if err := CmdListRpeositories.MarkFlagRequired("workspace"); err != nil {
+	CmdList.AddCommand(CmdListRepositories)
+	CmdListRepositories.Flags().StringVarP(&workspaceSlug, "workspace", "w", "", "Bitbucket workspace (Example: \"my-workspace\"")
+	if err := CmdListRepositories.MarkFlagRequired("workspace"); err != nil {
 		fmt.Println(err)
 	}
-	CmdListRpeositories.Flags().StringVarP(&projectKey, "project", "n", "", "Bitbucket project (Example: \"PROJ\"")
-	if err := CmdListRpeositories.MarkFlagRequired("project"); err != nil {
+	CmdListRepositories.Flags().StringVarP(&projectKey, "project", "n", "", "Bitbucket project (Example: \"PROJ\"")
+	if err := CmdListRepositories.MarkFlagRequired("project"); err != nil {
 		fmt.Println(err)
 	}
 }
